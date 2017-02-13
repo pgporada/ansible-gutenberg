@@ -1,0 +1,4 @@
+.kitchen/
+.git/
+.vendor/
+.bundle/
