@@ -1,5 +1,5 @@
 #!/bin/bash
-# AUTHOR: Phil Porada
+# AUTHOR: Phil Porada - philporada@gmail.com
 
 CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) / 2 ))
 
