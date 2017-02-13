@@ -1,7 +1,7 @@
 #!/bin/bash
 # AUTHOR: Phil Porada
 
-CPU_COUNT=(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) / 2 + 1 ))
+CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) / 2 ))
 
 if [ ! -f Gemfile.lock ]; then
     bundle install
