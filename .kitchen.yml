@@ -16,6 +16,8 @@ provisioner:
   ansible_verbosity: :warn
   ansible_version: latest
   ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
+  env_vars:
+    LOGSTASH_SERVER: 172.17.0.2
   ignore_paths_from_root:
     - .bundle
     - .kitchen
