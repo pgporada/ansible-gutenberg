@@ -31,6 +31,7 @@ platforms:
       image: geerlingguy/docker-centos6-ansible:latest
       privileged: true
       command: /sbin/init
+      network: host
   - name: centos-7
     driver_config:
       platform: centos
@@ -39,6 +40,7 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
+      network: host
   - name: debian-8
     driver_config:
       platform: debian
@@ -47,6 +49,7 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
+      network: host
   - name: ubuntu-12.04
     driver_config:
       platform: ubuntu
@@ -55,6 +58,7 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
+      network: host
   - name: ubuntu-14.04
     driver_config:
       platform: ubuntu
@@ -63,6 +67,7 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
+      network: host
   - name: ubuntu-16.04
     driver_config:
       platform: ubuntu
@@ -75,6 +80,7 @@ platforms:
       tmpfs:
         - /run
         - /run/lock
+      network: host
   - name: fedora-25
     driver_config:
       platform: rhel
@@ -83,6 +89,7 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
+      network: host
 
 suites:
   - name: default
