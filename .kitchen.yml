@@ -11,7 +11,7 @@ provisioner:
   require_chef_for_busser: false
   require_ruby_for_busser: false
   requirements_path: test/requirements.yml
-  ansible_cfg_path: ./ansible.cfg
+  ansible_cfg_path: ansible.cfg
   ansible_verbose: false
   ansible_verbosity: :warn
   ansible_version: latest
@@ -34,6 +34,10 @@ platforms:
       privileged: true
       command: /sbin/init
       network: host
+      run_command:
+        - sudo yum install -y python-pip
+        - sudo pip install python-logstash
+
   - name: centos-7
     driver_config:
       platform: centos
@@ -43,6 +47,10 @@ platforms:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
       network: host
+      run_command:
+        - sudo yum install -y python-pip
+        - sudo pip install python-logstash
+
   - name: debian-8
     driver_config:
       platform: debian
@@ -52,6 +60,12 @@ platforms:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
       network: host
+      run_command:
+        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get update
+        - sudo apt-get install -y python-pip
+        - sudo pip install python-logstash
+
   - name: ubuntu-12.04
     driver_config:
       platform: ubuntu
@@ -61,6 +75,12 @@ platforms:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
       network: host
+      run_command:
+        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get update
+        - sudo apt-get install -y python-pip
+        - sudo pip install python-logstash
+
   - name: ubuntu-14.04
     driver_config:
       platform: ubuntu
@@ -70,6 +90,12 @@ platforms:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
       network: host
+      run_command:
+        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get update
+        - sudo apt-get install -y python-pip
+        - sudo pip install python-logstash
+
   - name: ubuntu-16.04
     driver_config:
       platform: ubuntu
@@ -83,6 +109,14 @@ platforms:
         - /run
         - /run/lock
       network: host
+      run_command:
+        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get update
+        - sudo apt-get install -y python-pip
+        - sudo pip install setuptools --upgrade
+        - sudo pip install wheel virtualenv --upgrade
+        - sudo pip install python-logstash
+
   - name: fedora-25
     driver_config:
       platform: rhel
@@ -92,6 +126,9 @@ platforms:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
       network: host
+      run_command:
+        - sudo dnf install -y python-pip
+        - sudo pip install python-logstash
 
 suites:
   - name: default
