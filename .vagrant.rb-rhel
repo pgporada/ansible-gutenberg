@@ -1,0 +1,7 @@
+Vagrant.configure(2) do |config|
+    config.vm.provision "shell", inline: <<-SHELL
+        sudo yum install -y python-pip
+	sudo pip install setuptools==33.1.1
+	sudo pip install python-logstash
+    SHELL
+end
