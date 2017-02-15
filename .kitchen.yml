@@ -86,10 +86,10 @@ platforms:
   - name: debian-9
     driver_config:
       platform: debian
-      image: gmazoyer/ansible-docker-debian9
+      image: webdevops/ansible:debian-9
       privileged: true
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      #volume:
+      #  - /sys/fs/cgroup:/sys/fs/cgroup:ro
       #command: /sbin/init
       network: host
       run_command:
@@ -97,6 +97,8 @@ platforms:
         - sudo apt-get clean
         - sudo apt-get update
         - sudo apt-get install -y python-pip
+        - sudo pip install setuptools --upgrade
+        - sudo pip install wheel virtualenv --upgrade
         - sudo pip install python-logstash
 
   - name: ubuntu-12.04
@@ -117,11 +119,11 @@ platforms:
   - name: ubuntu-14.04
     driver_config:
       platform: ubuntu
-      image: bmacauley/docker-ubuntu1404-ansible:latest
+      image: williamyeh/ansible:ubuntu14.04
       privileged: true
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /usr/lib/systemd/systemd
+      #volume:
+      #  - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      #command: /usr/lib/systemd/systemd
       network: host
       run_command:
         - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
