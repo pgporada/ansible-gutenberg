@@ -51,17 +51,50 @@ platforms:
         - sudo yum install -y python-pip
         - sudo pip install python-logstash
 
-  - name: debian-8
+  - name: debian-7
     driver_config:
       platform: debian
-      image: geerlingguy/docker-debian8-ansible:latest
+      image: williamyeh/ansible:debian7
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /sbin/init
+      #command: /sbin/init
       network: host
       run_command:
         - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get clean
+        - sudo apt-get update
+        - sudo apt-get install -y python-pip
+        - sudo pip install python-logstash
+
+  - name: debian-8
+    driver_config:
+      platform: debian
+      image: gmazoyer/ansible-docker-debian8
+      privileged: true
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      #command: /sbin/init
+      network: host
+      run_command:
+        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get clean
+        - sudo apt-get update
+        - sudo apt-get install -y python-pip
+        - sudo pip install python-logstash
+
+  - name: debian-9
+    driver_config:
+      platform: debian
+      image: gmazoyer/ansible-docker-debian9
+      privileged: true
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      #command: /sbin/init
+      network: host
+      run_command:
+        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get clean
         - sudo apt-get update
         - sudo apt-get install -y python-pip
         - sudo pip install python-logstash
@@ -69,7 +102,7 @@ platforms:
   - name: ubuntu-12.04
     driver_config:
       platform: ubuntu
-      image: bdellegrazie/docker-ubuntu1204-ansible:latest
+      image: geerlingguy/docker-ubuntu1204-ansible:latest
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -84,11 +117,11 @@ platforms:
   - name: ubuntu-14.04
     driver_config:
       platform: ubuntu
-      image: bdellegrazie/docker-ubuntu1404-ansible:latest
+      image: bmacauley/docker-ubuntu1404-ansible:latest
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /sbin/init
+      command: /usr/lib/systemd/systemd
       network: host
       run_command:
         - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -99,22 +132,37 @@ platforms:
   - name: ubuntu-16.04
     driver_config:
       platform: ubuntu
-      image: bdellegrazie/docker-ubuntu1604-ansible:latest
+      image: geerlingguy/docker-ubuntu1604-ansible:latest
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /sbin/init
       stop_signal: SIGRTMIN+3
-      tmpfs:
-        - /run
-        - /run/lock
+      #tmpfs:
+      #  - /run
+      #  - /run/lock
       network: host
       run_command:
         - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+        - sudo apt-get clean
         - sudo apt-get update
+        - sudo apt-get install -f
         - sudo apt-get install -y python-pip
         - sudo pip install setuptools --upgrade
         - sudo pip install wheel virtualenv --upgrade
+        - sudo pip install python-logstash
+  
+  - name: fedora-24
+    driver_config:
+      platform: rhel
+      image: geerlingguy/docker-fedora24-ansible:latest
+      privileged: true
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      command: /sbin/init
+      network: host
+      run_command:
+        - sudo dnf install -y python-pip
         - sudo pip install python-logstash
 
   - name: fedora-25
