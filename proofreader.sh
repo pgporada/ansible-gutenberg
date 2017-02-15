@@ -18,3 +18,5 @@ fi
 bundle exec kitchen list
 
 bundle exec kitchen converge -c $CPU_COUNT
+
+bundle exec kitchen destroy
