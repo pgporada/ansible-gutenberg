@@ -19,10 +19,18 @@ Run tests
 
     bundle install
     bundle update
+
+    # Installs all the containers from .kitchen.yml
     bundle exec kitchen create
+
+    # Let's say you have the following 2 playbooks, you can specify the path to them
     PLAYBOOK=test/integration/default/phil1.yml bundle exec kitchen converge
     PLAYBOOK=test/integration/default/phil2.yml bundle exec kitchen converge
-    PLAYBOOK=test/integration/default/phil3.yml bundle exec kitchen converge
+
+    # This still runs the default.yml playbook
+    bundle exec kitchen converge
+
+    # Cleanup
     bundle exec kitchen destroy
 
 - - - -
