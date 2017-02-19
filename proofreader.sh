@@ -16,6 +16,10 @@ fi
 
 bundle exec kitchen list
 
+LOGSTASH_CID=$(docker ps | grep logstash | awk '{print $1}')
+export LOGSTASH_SERVER=$(docker inspect $LOGSTASH_CID | grep IPAddress | tail -n1 | awk '{print $2}' | sed -e 's/"//g' -e 's/,//g')
+echo $LOGSTASH_SERVER
+
 bundle exec kitchen converge -c $CPU_COUNT
 
 #bundle exec kitchen destroy
