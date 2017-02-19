@@ -1,0 +1,1 @@
+/home/phil/Downloads/c6h12o6/ansible-logstash-callback/logstash.py
