@@ -27,6 +27,9 @@ Run tests
     PLAYBOOK=test/integration/default/phil1.yml bundle exec kitchen converge
     PLAYBOOK=test/integration/default/phil2.yml bundle exec kitchen converge
 
+    # Assume you have a requirement file in some path other than test/requirements.yml on your host machine
+    REQUIREMENTS=/home/phil/requirements.yml bundle exec kitchen converge
+
     # This still runs the default.yml playbook
     bundle exec kitchen converge
 
