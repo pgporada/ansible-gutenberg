@@ -7,6 +7,10 @@ Some helper scripts and stuff that help me print out (play)book after (play)book
 # Usage
 
 ### Automagic
+Start the logging infrastructure
+
+    ./layout.sh
+
 Create a playbook
 
     ./printer.sh
