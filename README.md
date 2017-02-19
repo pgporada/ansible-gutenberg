@@ -9,6 +9,11 @@ Some helper scripts and stuff that help me print out (play)book after (play)book
 Requires `sudo npm install -g elasticdump`
 
 ### Automagic
+Just run this
+
+    make
+
+### Manually
 Start the logging infrastructure
 
     ./layout.sh
@@ -25,7 +30,7 @@ Get stats out of the logs stored in elasticsearch
 
     ./publisher.sh
 
-### Manually
+### Really really manually
 
     bundle install
     bundle update
