@@ -14,12 +14,12 @@ for INDEX in $INDICES; do
         --bulk \
         --type=mapping \
         --input=http://${ELASTICSEARCH_SERVER}:9200/${INDEX} \
-        --output=$ | gzip > ${INDEX}.mapping.json.gz
+        --output=elasticsearch-logs/${INDEX}.mapping.json
 
     echo $INDEX - data
     elasticdump \
         --bulk \
         --type=data \
         --input=http://${ELASTICSEARCH_SERVER}:9200/${INDEX} \
-        --output=$ | gzip > ${INDEX}.data.json.gz
+        --output=elasticsearch-logs/${INDEX}.data.json
 done

@@ -6,3 +6,4 @@ Gemfile.lock
 config/
 *OFF
 *.gz
+elasticsearch-logs/*.json

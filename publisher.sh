@@ -5,6 +5,7 @@
 echo "+-----------+"
 echo "+ Log Files +"
 echo "+-----------+"
+cd elasticsearch-logs
 LOGFILES=$(find . -type f -name "logstash-*.data.json" | sed 's|^./||')
 for i in ${LOGFILES}; do
     echo ${i}
