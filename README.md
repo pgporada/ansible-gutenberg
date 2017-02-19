@@ -6,18 +6,24 @@ Some helper scripts and stuff that help me print out (play)book after (play)book
 
 # Usage
 
+Requires `sudo npm install -g elasticdump`
+
 ### Automagic
 Start the logging infrastructure
 
     ./layout.sh
 
-Create a playbook
+Create playbook(s)
 
     ./printer.sh
 
-Run tests
+Generate some data based on the playbooks
 
     ./proofreader.sh
+
+Get stats out of the logs stored in elasticsearch
+
+    ./publisher.sh
 
 ### Manually
 
