@@ -5,7 +5,6 @@ CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) + 2 
 
 if [ ! -f Gemfile.lock ]; then
     bundle install
-else
     bundle update
 fi
 
@@ -19,4 +18,4 @@ bundle exec kitchen list
 
 bundle exec kitchen converge -c $CPU_COUNT
 
-bundle exec kitchen destroy
+#bundle exec kitchen destroy

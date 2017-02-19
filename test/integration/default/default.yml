@@ -2,5 +2,4 @@
 - hosts: all
   roles:
     - pgporada.repo-epel
-#    - ansible-role-whatever
 ...
