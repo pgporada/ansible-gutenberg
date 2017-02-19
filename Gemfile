@@ -1,11 +1,11 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 group :test do
-  gem 'test-kitchen'
-  gem 'kitchen-docker_cli', :git => 'https://github.com/bdellegrazie/kitchen-docker_cli.git', :branch => 'stable'
-  gem 'kitchen-ansible'
-  gem 'kitchen-verifier-serverspec'
   gem 'docker-api'
+  gem 'kitchen-ansible'
+  gem 'kitchen-docker_cli', git: 'https://github.com/bdellegrazie/kitchen-docker_cli.git', branch: 'stable'
+  gem 'kitchen-verifier-serverspec'
   gem 'serverspec'
+  gem 'test-kitchen'
   gem 'travis'
 end
