@@ -7,8 +7,23 @@ ELASTICSEARCH_IPADDR=$(docker inspect $ELASTICSEARCH_CID | grep IPAddress | tail
 echo
 
 echo "+) Starting logstash"
-LOGSTASH_CID=$(docker run -d -p 5000:5000 --rm logstash -e "input {tcp {port => 5000 codec => json}} output {elasticsearch { hosts => [\"$ELASTICSEARCH_IPADDR:9200\"] ssl_certificate_verification => false} stdout {codec => rubydebug }}")
-echo
+cat << LOGSTASH > config/logstash.conf
+input {
+    tcp {
+        port => 5000
+        codec => json
+    }
+}
+output {
+    elasticsearch {
+        hosts => ["${ELASTICSEARCH_IPADDR}:9200"]
+    }
+    stdout {
+        codec => rubydebug
+    }
+}
+LOGSTASH
+LOGSTASH_CID=$(docker run -it --rm -dp 5000:5000 -v "$(pwd)/config/":/config-dir logstash -f /config-dir/logstash.conf)
 
 echo "+) Loading ansible template into elasticsearch"
 curl -s -XPUT 'http://localhost:9200/_template/ansible' -d@"plugins/ansible.template"
