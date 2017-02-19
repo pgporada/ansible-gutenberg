@@ -6,6 +6,7 @@ Some helper scripts and stuff that help me print out (play)book after (play)book
 
 # Usage
 
+### Automagic
 Create a playbook
 
     ./printer.sh
@@ -13,6 +14,16 @@ Create a playbook
 Run tests
 
     ./proofreader.sh
+
+### Manually
+
+    bundle install
+    bundle update
+    bundle exec kitchen create
+    PLAYBOOK=test/integration/default/phil1.yml bundle exec kitchen converge
+    PLAYBOOK=test/integration/default/phil2.yml bundle exec kitchen converge
+    PLAYBOOK=test/integration/default/phil3.yml bundle exec kitchen converge
+    bundle exec kitchen destroy
 
 - - - -
 
