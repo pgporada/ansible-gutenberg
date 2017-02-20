@@ -18,7 +18,7 @@ provisioner:
   ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
   playbook: <%= ENV['PLAYBOOK'] || "test/integration/default/default.yml" %>
   env_vars:
-    LOGSTASH_SERVER: <%= ENV['LOGSTASH_SERVER'] || "172.17.0.2" %>
+    LOGSTASH_SERVER: <%= ENV['LOGSTASH_SERVER'] || "172.17.0.3" %>
   ignore_paths_from_root:
     - .bundle
     - .kitchen
