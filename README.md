@@ -1,4 +1,5 @@
 # Overview: ansible-gutenberg
+[![License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)](LICENSE)
 
 Some helper scripts and stuff that help me print out (play)book after (play)book. Get it. Gutenberg. Ha! :D
 
