@@ -1,5 +1,7 @@
 #!/bin/bash
 # AUTHOR: Phil Porada - philporada@gmail.com
+echo "+) Clearing old logs"
+rm -f elasticsearch-logs/*.json*
 
 echo "+) Getting elasticsearch information"
 ELASTICSEARCH_CID=$(docker ps | grep elasticsearch | awk '{print $1}')
