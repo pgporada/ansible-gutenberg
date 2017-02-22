@@ -69,7 +69,21 @@ PLAYBOOKS=( $(for i in $LOGFILES; do jq -r '._source.ansible_playbook' $i; done 
 for i in ${PLAYBOOKS[@]}; do
     echo ${i}
 done
+echo
 # #-------
 #
 # #-------
 
+# 6) Get names of all the roles from each session id
+echo "+----------------------------------+"
+echo "+ # Display names of all roles run +"
+echo "+----------------------------------+"
+for SID in ${SIDS[@]}; do
+    jq -r ". | select(._source.session==\"$SID\") | ._source.ansible_task" *.data.json
+done
+echo
+# #-------
+# TASK: setup
+# TASK: pgporada.repo-epel : Install EPEL repo
+# TASK: pgporada.repo-epel : Second pass to ensure EPEL is the latest version
+# #-------
