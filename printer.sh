@@ -7,7 +7,7 @@ CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) + 2 
 declare -a NTP_ROLES
 NTP_ROLES=( $(ansible-galaxy search ntp | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
 
-mkdir -p playbooks/{ntp}
+mkdir -p playbooks/ntp
 
 rm -f chapters.txt
 
