@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Install EPEL repository
+  hosts: all
   roles:
     - pgporada.repo-epel
 ...
