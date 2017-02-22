@@ -9,3 +9,4 @@ config/
 elasticsearch-logs/*.json
 tmp/
 playbooks/
+chapters.txt
