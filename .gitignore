@@ -8,3 +8,4 @@ config/
 *.gz
 elasticsearch-logs/*.json
 tmp/
+playbooks/
