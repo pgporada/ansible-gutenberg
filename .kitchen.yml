@@ -37,6 +37,7 @@ platforms:
       network: host
       run_command:
         - sudo yum install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -51,6 +52,7 @@ platforms:
       network: host
       run_command:
         - sudo yum install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -68,6 +70,7 @@ platforms:
         - sudo apt-get clean
         - sudo apt-get update
         - sudo apt-get install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -85,6 +88,7 @@ platforms:
         - sudo apt-get clean
         - sudo apt-get update
         - sudo apt-get install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -102,7 +106,7 @@ platforms:
         - sudo apt-get clean
         - sudo apt-get update
         - sudo apt-get install -y python-pip
-        - sudo pip install setuptools --upgrade
+        - sudo pip install setuptools==33.1.1
         - sudo pip install wheel virtualenv --upgrade
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
@@ -120,6 +124,7 @@ platforms:
         - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
         - sudo apt-get update
         - sudo apt-get install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -136,6 +141,7 @@ platforms:
         - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
         - sudo apt-get update
         - sudo apt-get install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -158,7 +164,7 @@ platforms:
         - sudo apt-get update
         - sudo apt-get install -f
         - sudo apt-get install -y python-pip
-        - sudo pip install setuptools --upgrade
+        - sudo pip install setuptools==33.1.1
         - sudo pip install wheel virtualenv --upgrade
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
@@ -174,6 +180,7 @@ platforms:
       network: host
       run_command:
         - sudo dnf install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
@@ -188,6 +195,7 @@ platforms:
       network: host
       run_command:
         - sudo dnf install -y python-pip
+        - sudo pip install setuptools==33.1.1
         - sudo pip install --upgrade pip
         - sudo pip install python-logstash
 
