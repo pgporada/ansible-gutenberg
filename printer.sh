@@ -2,31 +2,49 @@
 # AUTHOR: Phil Porada - philporada@gmail.com
 # WHAT: Prints out playbook after playbook
 
-CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) + 2 ))
+function usage {
+    echo -e "
+    USAGE:
 
-declare -a NTP_ROLES
-NTP_ROLES=( $(ansible-galaxy search ntp | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
+    ./$(basename $0) ntp 'Install and configure an ntp daemon from Ansible Galaxy'
+    ./$(basename $0) java 'Install a java role from Ansible Galaxy'
+    "
+}
 
-mkdir -p playbooks/ntp
+function printer {
+    local CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) + 2 ))
+    local TYPE="${1}"
+    local DESC="${2}"
+    declare -a ROLES
 
-rm -f chapters.txt
+    rm -f chapter_$TYPE.txt
+    ROLES=( $(ansible-galaxy search $TYPE | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
 
-for ROLE in ${NTP_ROLES[@]}; do
-    mkdir -p playbooks/ntp/$ROLE
-    cat << REQ > playbooks/ntp/$ROLE/requirements.yml
+    for ROLE in ${ROLES[@]}; do
+        mkdir -p playbooks/$TYPE/$ROLE
+        echo "PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$TYPE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$TYPE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT" >> chapter_$TYPE.txt
+        cat << REQ > playbooks/$TYPE/$ROLE/requirements.yml
 ---
 - src: $ROLE
 ...
 REQ
 
-    cat << PLAYBOOK > playbooks/ntp/$ROLE/playbook_ntp_$ROLE.yml
+        cat << PLAYBOOK > playbooks/$TYPE/$ROLE/playbook_$TYPE_$ROLE.yml
 ---
-- name: Installs and configures an ntp daemon with a role from Ansible Galaxy
+- name: "${DESC}"
   hosts: all
   roles:
     - $ROLE
 ...
 PLAYBOOK
+    done
+}
 
-echo "PLAYBOOK=playbooks/ntp/$ROLE/playbook_ntp_$ROLE.yml REQUIREMENTS_PATH=playbooks/ntp/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT" >> chapters.txt
-done
+if [ $# -ne 2 ]; then
+    usage
+    exit 1
+else
+    TYPE="${1}"
+    DESC="${2}"
+    printer "${TYPE}" "${DESC}"
+fi
