@@ -9,5 +9,5 @@ config/
 elasticsearch-logs/*.json
 tmp/
 playbooks/
-chapters.txt
+chapter_*.txt
 status.log
