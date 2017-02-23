@@ -7,12 +7,10 @@ Some helper scripts and stuff that help me print out (play)book after (play)book
 
 # Usage
 
-Requires `sudo npm install -g elasticdump`
-
-### Automagic
-Just run this
-
-    make
+Requires
+* `sudo npm install -g elasticdump`
+* `python-pip`
+* `pip install tox`
 
 ### Manually
 Start the logging infrastructure
@@ -23,13 +21,17 @@ Create playbook(s)
 
     ./printer.sh
 
-Generate some data based on the playbooks
+Generate all the data
 
     ./proofreader.sh
 
-Get stats out of the logs stored in elasticsearch
+Get the data out of Elasticsearch
 
     ./publisher.sh
+
+Get stats out of the logs stored in elasticsearch
+
+    ./reviewer.sh
 
 ### Really really manually
 
@@ -65,3 +67,4 @@ This project utilizes the `kitchen` project and `docker`. You'll need a docker e
 GPLv3
 
 Phil Porada - philporada@gmail.com
+[David Dondero - Rothko Chapel](https://www.youtube.com/watch?v=SMLlp_7yNNc)
