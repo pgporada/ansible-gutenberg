@@ -10,3 +10,4 @@ elasticsearch-logs/*.json
 tmp/
 playbooks/
 chapters.txt
+status.log
