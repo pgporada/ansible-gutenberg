@@ -11,8 +11,13 @@ Requires
 * `sudo npm install -g elasticdump`
 * `python-pip`
 * `pip install tox`
+* `bundler` for ruby gems
 
 ### Manually
+Install dependecies
+
+    bundle install
+
 Start the logging infrastructure
 
     ./layout.sh
