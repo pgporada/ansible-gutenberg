@@ -19,6 +19,10 @@ Install dependecies
 
     bundle install
 
+Build the containers we'll use to test all this ansible
+
+    ./container-builder.sh
+
 Start the logging infrastructure
 
     ./layout.sh
