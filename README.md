@@ -7,7 +7,8 @@ Some helper scripts and stuff that help me print out (play)book after (play)book
 
 # Usage
 
-Requires
+### Requirements
+
 * `sudo npm install -g elasticdump`
 * `python-pip`
 * `pip install tox`
