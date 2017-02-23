@@ -31,124 +31,75 @@ platforms:
   - name: centos-6
     driver_config:
       platform: centos
-      image: geerlingguy/docker-centos6-ansible:latest
+      image: c6h12o6-centos6
       privileged: true
       command: /sbin/init
       network: host
-      run_command:
-        - sudo yum install -y python-pip
-        - sudo pip install --upgrade --ignore-installed --no-cache-dir pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed --no-cache-dir
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
   - name: centos-7
     driver_config:
       platform: centos
-      image: geerlingguy/docker-centos7-ansible:latest
+      image: c6h12o6-centos7
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /usr/lib/systemd/systemd
       network: host
-      run_command:
-        - sudo yum install -y python-pip
-        - sudo pip install --upgrade --ignore-installed --no-cache-dir pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed --no-cache-dir
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
   - name: debian-7
     driver_config:
       platform: debian
-      image: williamyeh/ansible:debian7
+      image: c6h12o6-debian7
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       #command: /sbin/init
       network: host
-      run_command:
-        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-        - sudo apt-get clean
-        - sudo apt-get update
-        - sudo apt-get install -y python-pip
-        #- sudo pip install setuptools==33.1.1 --ignore-installed
-        - sudo pip install python-logstash --ignore-installed
 
   - name: debian-8
     driver_config:
       platform: debian
-      image: gmazoyer/ansible-docker-debian8
+      image: c6h12o6-debian8
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       #command: true
       network: host
-      run_command:
-        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-        - sudo apt-get clean
-        - sudo apt-get update
-        - sudo apt-get install -y python-pip
-        - sudo pip install --upgrade --ignore-installed  pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed 
-        - sudo pip install python-logstash --ignore-installed 
 
   - name: debian-9
     driver_config:
       platform: debian
-      image: webdevops/ansible:debian-9
+      image: c6h12o6-debian9
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: true
       network: host
-      run_command:
-        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-        - sudo apt-get clean
-        - sudo apt-get update
-        - sudo apt-get install -y python-pip
-        - sudo pip install --upgrade --ignore-installed --no-cache-dir pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed --no-cache-dir
-        - sudo pip install wheel virtualenv --upgrade --ignore-installed --no-cache-dir
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
   - name: ubuntu-12.04
     driver_config:
       platform: ubuntu
-      image: geerlingguy/docker-ubuntu1204-ansible:latest
+      image: c6h12o6-ubuntu1204
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       #command: /sbin/init
       network: host
-      run_command:
-        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-        - sudo apt-get update
-        - sudo apt-get upgrade -y
-        - sudo apt-get install -y python-pip
-        - sudo pip install setuptools==33.1.1 --ignore-installed
-        - sudo pip install python-logstash --ignore-installed
 
   - name: ubuntu-14.04
     driver_config:
       platform: ubuntu
-      image: williamyeh/ansible:ubuntu14.04
+      image: c6h12o6-ubuntu1404
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       #command: /usr/lib/systemd/systemd
       network: host
-      run_command:
-        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-        - sudo apt-get update
-        - sudo apt-get upgrade -y
-        - sudo apt-get install -y python-pip
-        - sudo pip install --upgrade --ignore-installed pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
   - name: ubuntu-16.04
     driver_config:
       platform: ubuntu
-      image: geerlingguy/docker-ubuntu1604-ansible:latest
+      image: c6h12o6-ubuntu1604
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -158,47 +109,26 @@ platforms:
         - /run
         - /run/lock
       network: host
-      run_command:
-        - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-        - sudo apt-get clean
-        - sudo apt-get update
-        - sudo apt-get upgrade -y
-        - sudo apt-get install -f
-        - sudo apt-get install -y python-pip
-        - sudo pip install --upgrade --ignore-installed --no-cache-dir pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed --no-cache-dir
-        - sudo pip install wheel virtualenv --upgrade --ignore-installed --no-cache-dir
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
   - name: fedora-24
     driver_config:
       platform: rhel
-      image: geerlingguy/docker-fedora24-ansible:latest
+      image: c6h12o6-fedora24
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /usr/lib/systemd/systemd
       network: host
-      run_command:
-        - sudo dnf install -y python-pip
-        - sudo pip install --upgrade --ignore-installed --no-cache-dir pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed --no-cache-dir
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
   - name: fedora-25
     driver_config:
       platform: rhel
-      image: bdellegrazie/docker-fedora25-ansible:latest
+      image: c6h12o6-fedora25
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       command: /usr/lib/systemd/systemd
       network: host
-      run_command:
-        - sudo dnf install -y python-pip
-        - sudo pip install --upgrade --ignore-installed --no-cache-dir pip 
-        - sudo pip install setuptools==33.1.1 --ignore-installed --no-cache-dir
-        - sudo pip install python-logstash --ignore-installed --no-cache-dir
 
 suites:
   - name: default
