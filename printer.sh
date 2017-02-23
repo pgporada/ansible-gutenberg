@@ -22,7 +22,7 @@ function printer {
 
     for ROLE in ${ROLES[@]}; do
         mkdir -p playbooks/$TYPE/$ROLE
-        echo "PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$TYPE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$TYPE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT" >> chapter_$TYPE.txt
+        echo "bundle exec kitchen destroy; PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$TYPE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$TYPE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT; bundle exec kitchen create;" >> chapter_$TYPE.txt
         cat << REQ > playbooks/$TYPE/$ROLE/requirements.yml
 ---
 - src: $ROLE
