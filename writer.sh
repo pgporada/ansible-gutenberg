@@ -6,6 +6,6 @@ rm -f status.log
 
 while read LINE; do
     echo "[START]  - $(date) - ${LINE}" >> status.log
-    echo "${LINE}"
+    eval "${LINE}"
     echo "[FINISH] - $(date) - ${LINE}" >> status.log
 done < chapters.txt
