@@ -73,4 +73,5 @@ This project utilizes the `kitchen` project and `docker`. You'll need a docker e
 GPLv3
 
 Phil Porada - philporada@gmail.com
+
 [David Dondero - Rothko Chapel](https://www.youtube.com/watch?v=SMLlp_7yNNc)
