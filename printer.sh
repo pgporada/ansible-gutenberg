@@ -22,7 +22,8 @@ function printer {
 
     for ROLE in ${ROLES[@]}; do
         mkdir -p playbooks/$TYPE/$ROLE
-        echo "bundle exec kitchen destroy; PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$TYPE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$TYPE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT; bundle exec kitchen create;" >> chapter_$TYPE.txt
+        # We already built the containers, let's blow them away and start them up immediately
+        echo "bundle exec kitchen destroy -c10; PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$TYPE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$TYPE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT; bundle exec kitchen create -c10;" >> chapter_$TYPE.txt
         cat << REQ > playbooks/$TYPE/$ROLE/requirements.yml
 ---
 - src: $ROLE
