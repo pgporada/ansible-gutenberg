@@ -17,6 +17,7 @@ input {
 output {
     elasticsearch {
         hosts => ["${ELASTICSEARCH_IPADDR}:9200"]
+        ssl_certificate_verification => false
     }
     stdout {
         codec => rubydebug
