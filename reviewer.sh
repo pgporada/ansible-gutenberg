@@ -21,7 +21,7 @@ echo "+-------------+"
 echo "+ Session IDs +"
 echo "+-------------+"
 declare -a SIDS
-SIDS=( $(for i in $LOGFILES; do jq -r '._source.session' $i; done 2>&1 | sed '/parse error/d' | sort -u) )
+SIDS=( $(for i in $LOGFILES; do jq -r '._source.session' $i; done 2>&1 | sed -e '/parse error/d' -e '/^null$/d' | sort -u) )
 for i in ${SIDS[@]}; do
     echo ${i}
 done
@@ -65,7 +65,7 @@ echo "+ # Display name of playbooks ran +"
 echo "+---------------------------------+"
 LOGFILES=$(find . -type f -name "logstash-*.data.json" | sed 's|^./||')
 declare -a PLAYBOOKS
-PLAYBOOKS=( $(for i in $LOGFILES; do jq -r '._source.ansible_playbook' $i; done 2>&1 | sed '/parse error/d') )
+PLAYBOOKS=( $(for i in $LOGFILES; do jq -r '._source.ansible_playbook' $i; done 2>&1 | sed -e '/parse error/d' -e '/^null$/d') )
 for i in ${PLAYBOOKS[@]}; do
     echo ${i}
 done
@@ -74,16 +74,46 @@ echo
 #
 # #-------
 
-# 6) Get names of all the roles from each session id
+# 6) Display all play IDs
+echo "+------------------------+"
+echo "+ # Display all play IDs +"
+echo "+------------------------+"
+declare -a PLAYIDS
+PLAYIDS=( $(for i in $LOGFILES; do jq -r '._source.ansible_play_id' $i; done 2>&1 | sed -e '/parse error/d' -e '/^null$/d') )
+for i in ${PLAYIDS[@]}; do
+    echo "${i}"
+done
+echo
+# #-------
+# 1c5f35bf-c7ba-4e8c-84c4-7b44992d4943
+# faf21b87-a808-462e-98d4-0b349210c3ce
+# faf21b87-a808-462e-98d4-0b349210c3ce
+# 3344b2e4-32e3-4565-ab0a-9605093f7782
+# #-------
+
+# 7) Count the # of Play IDs, this will be the number of plays run
+echo "+------------------+"
+echo "+ # of Play IDs +"
+echo "+------------------+"
+echo ${#PLAYIDS[@]}
+echo
+# #-------
+# 256
+# #-------
+
+# 8) Get names of all the roles from each session id
 echo "+----------------------------------+"
 echo "+ # Display names of all roles run +"
 echo "+----------------------------------+"
 for SID in ${SIDS[@]}; do
-    jq -r ". | select(._source.session==\"$SID\") | ._source.ansible_task" *.data.json
-done
+	jq -r ". | select(._source.session==\"$SID\") | ._source.ansible_task" *.data.json | sed -e '/^null$/d' | awk '{print $1}'
+done | sort -u
 echo
 # #-------
-# TASK: setup
-# TASK: pgporada.repo-epel : Install EPEL repo
-# TASK: pgporada.repo-epel : Second pass to ensure EPEL is the latest version
+# kbrebanov.ntp
+# mamercad.ntp
+# manala.ntp
+# olibob.ntp
+# pgporada.ntp
+# ragingbal.ntp
 # #-------
