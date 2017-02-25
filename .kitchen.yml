@@ -77,7 +77,7 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /lib/systemd/systemd
+      #command: /sbin/init
       network: host
       skip_preparation: true
 

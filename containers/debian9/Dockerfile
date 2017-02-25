@@ -1,4 +1,4 @@
-FROM webdevops/ansible:debian-9
+FROM debian:jessie
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get clean
 RUN apt-get update
