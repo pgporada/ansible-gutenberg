@@ -1,4 +1,4 @@
-FROM geerlingguy/docker-ubuntu1204-ansible:latest
+FROM ubuntu-upstart:12.04
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get update
 RUN apt-get upgrade -y

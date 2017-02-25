@@ -1,4 +1,4 @@
-FROM williamyeh/ansible:debian7
+FROM huxy/docker-debian:latest
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get clean
 RUN apt-get update

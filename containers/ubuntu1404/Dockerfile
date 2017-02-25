@@ -1,4 +1,4 @@
-FROM williamyeh/ansible:ubuntu14.04
+FROM ubuntu-upstart:14.04
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get update
 RUN apt-get upgrade -y
