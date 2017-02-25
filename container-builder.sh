@@ -7,7 +7,7 @@ RST=$(tput sgr0)
 
 cd containers
 for i in $(find -type d | sed -e 's|./||g' -e 's/\.//g' -e '/^$/d'); do
-    echo "${BLD}${i}${RST}"
+    echo "${BLD}Building container: ${i}${RST}"
     cd $i
     docker build -t c6h12o6-$i .
     cd ..
