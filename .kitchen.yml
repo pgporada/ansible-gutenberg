@@ -55,6 +55,7 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      cmd: /my_init
       network: host
       skip_preparation: true
 
@@ -65,6 +66,7 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      command: /lib/systemd/systemd
       network: host
       skip_preparation: true
 
@@ -75,6 +77,7 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      command: /lib/systemd/systemd
       network: host
       skip_preparation: true
 
@@ -85,6 +88,7 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      command: /sbin/init
       network: host
       skip_preparation: true
 
@@ -95,6 +99,7 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      command: /sbin/init
       network: host
       skip_preparation: true
 
@@ -105,7 +110,9 @@ platforms:
       privileged: true
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      command: /lib/systemd/systemd
       stop_signal: SIGRTMIN+3
+      security_opt: seccomp=unconfined
       tmpfs:
         - /run
         - /run/lock
