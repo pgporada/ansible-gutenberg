@@ -2,7 +2,7 @@ FROM ubuntu-upstart:14.04
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt update
 RUN apt upgrade -y
-RUN apt-get install -y python-pip libffi-dev libssl-dev python-dev sudo curl tar
+RUN apt-get install -y python-pip libffi-dev libssl-dev python-dev sudo curl tar iso-codes lsb-release python-apt python-apt-common python-gnupginterface python-pycurl ucf unattended-upgrades xz-utils
 RUN apt install -f -y
 RUN pip install --upgrade --ignore-installed pip
 RUN pip install setuptools==33.1.1 --ignore-installed
