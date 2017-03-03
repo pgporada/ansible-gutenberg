@@ -2,7 +2,7 @@
 # AUTHOR: Phil Porada - philporada@gmail.com
 # WHAT: Runs all of the commands inside chapters.txt. Outputs status
 #       to a separate file named status.log that you can tail.
-if [ $# -ne 1]; then
+if [ $# -ne 1 ]; then
     echo "Need an argument"
     exit 1
 fi
