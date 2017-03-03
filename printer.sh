@@ -14,26 +14,26 @@ function usage {
 function print_docker {
     local ROLE="${1}"
     local DESC="${2}"
-    declare -a ROLES
+    declare -a AGROLES
     rm -f chapter_$ROLE.txt
-    ROLES=( $(ansible-galaxy search $ROLE | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
+    AGROLES=( $(ansible-galaxy search $ROLE | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
 
-    for ROLE in ${ROLES[@]}; do
+    for i in ${AGROLES[@]}; do
         mkdir -p playbooks/$TYPE/$ROLE
         # We already built the containers, let's blow them away and start them up immediately
-        echo "bundle exec kitchen destroy -c10; PLAYBOOK=playbooks/$ROLE/$ROLE/playbook_$ROLE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$ROLE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT; bundle exec kitchen create -c10;" >> chapter_$ROLE.txt
+        echo "bundle exec kitchen create -c$CPU_COUNT; sleep 10; bundle exec kitchen create -c$CPU_COUNT; PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$i.yml bundle exec kitchen converge -c$CPU_COUNT; bundle exec kitchen destroy -c$CPU_COUNT" >> chapter_$ROLE.txt
         cat << REQ > playbooks/$TYPE/$ROLE/requirements.yml
 ---
-- src: $ROLE
+- src: $i
 ...
 REQ
 
-        cat << PLAYBOOK > playbooks/$TYPE/$ROLE/playbook_$ROLE_$ROLE.yml
+        cat << PLAYBOOK > playbooks/$TYPE/$ROLE/playbook_$i.yml
 ---
 - name: "${DESC}"
   hosts: all
   roles:
-    - $ROLE
+    - $i
 ...
 PLAYBOOK
     done
@@ -42,21 +42,18 @@ PLAYBOOK
 function print_ec2 {
     local ROLE="${1}"
     local DESC="${2}"
-    declare -a ROLES
-    rm -f chapter_$ROLE.txt
-    ROLES=( $(ansible-galaxy search $ROLE | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
+    declare -a AGROLES
+    rm -f chapter_$TYPE.txt
+    AGROLES=( $(ansible-galaxy search $ROLE | awk 'NR>5' | awk '{print $1}' | sed 's/[[:space:]]//g') )
 
-    for ROLE in ${ROLES[@]}; do
+    for i in ${AGROLES[@]}; do
         mkdir -p playbooks/$TYPE/$ROLE
         # We already built the containers, let's blow them away and start them up immediately
-        echo "bundle exec kitchen destroy -c10; PLAYBOOK=playbooks/$ROLE/$ROLE/playbook_$ROLE_$ROLE.yml REQUIREMENTS_PATH=playbooks/$ROLE/$ROLE/requirements.yml bundle exec kitchen converge -c $CPU_COUNT; bundle exec kitchen create -c10;" >> chapter_$ROLE.txt
-        cat << REQ > playbooks/$TYPE/$ROLE/requirements.yml
----
-- src: $ROLE
-...
-REQ
+        echo "bundle exec kitchen create -c$CPU_COUNT; sleep 20; bundle exec kitchen create -c$CPU_COUNT; PLAYBOOK=playbooks/$TYPE/$ROLE/playbook_$i.yml bundle exec kitchen converge -c$CPU_COUNT; bundle exec kitchen destroy -c$CPU_COUNT" >> chapter_$ROLE.txt
 
-        cat << PLAYBOOK > playbooks/$TYPE/$ROLE/playbook_$ROLE_$ROLE.yml
+        # The roles are installed on the control host already
+
+        cat << PLAYBOOK > playbooks/$TYPE/$ROLE/playbook_$i.yml
 ---
 - name: "${DESC}"
   hosts: all
@@ -64,7 +61,7 @@ REQ
   become: true
   become_method: sudo
   roles:
-    - $ROLE
+    - $i
 ...
 PLAYBOOK
     done
@@ -87,7 +84,7 @@ while getopts ":t:r:d:" opt; do
 done
 
 for i in TYPE ROLE DESC; do
-    if [ -z ${!i} ]; then
+    if [ -z "${!i}" ]; then
         usage
         echo $i was not set
         exit 1
@@ -95,4 +92,4 @@ for i in TYPE ROLE DESC; do
 done
 
 CPU_COUNT=$(( $(grep "^processor" /proc/cpuinfo | awk '{print $3}' | wc -l) + 2 ))
-printer_${TYPE} "${ROLE}" "${DESC}"
+print_${TYPE} "${ROLE}" "${DESC}"
